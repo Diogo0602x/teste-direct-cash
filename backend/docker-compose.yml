@@ -1,0 +1,68 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: church_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-churchuser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-churchpass}
+      POSTGRES_DB: ${DB_NAME:-churchdb}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - church_network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-churchuser} -d ${DB_NAME:-churchdb}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: church_backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-churchuser}:${DB_PASSWORD:-churchpass}@db:5432/${DB_NAME:-churchdb}?schema=public
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-in-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      NODE_ENV: development
+      PORT: ${PORT:-4000}
+      # Força polling para detectar mudanças de arquivo dentro do Docker
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "500"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - '${PORT:-4000}:4000'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - church_network
+    volumes:
+      # Monta o código-fonte e prisma em tempo real
+      - ./src:/app/src
+      - ./prisma:/app/prisma
+      # Persiste uploads entre reinicializações
+      - uploads_data:/app/uploads
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: package.json
+
+volumes:
+  postgres_data:
+    driver: local
+  uploads_data:
+    driver: local
+
+networks:
+  church_network:
+    driver: bridge

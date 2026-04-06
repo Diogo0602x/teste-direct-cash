@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: church_frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:4000/api/v1}
+      NODE_ENV: development
+      # Necessário no Windows/Mac: Docker não propaga eventos de filesystem nativamente
+      WATCHPACK_POLLING: 'true'
+      CHOKIDAR_USEPOLLING: 'true'
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      # Monta o código-fonte para hot reload
+      - .:/app
+      # Isola node_modules do container (evita conflito com host Windows)
+      - /app/node_modules
+      # Persiste o cache do Next.js entre restarts
+      - frontend_next_cache:/app/.next
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: package.json
+
+volumes:
+  frontend_next_cache:

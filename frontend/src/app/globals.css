@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-geist-sans: 'Geist', system-ui, sans-serif;
+    --font-geist-mono: 'Geist Mono', monospace;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900;
+  }
+}
+
+@layer utilities {
+  /* Animações de entrada */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-in-out both;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out both;
+  }
+
+  .animate-slide-up-delay-1 {
+    animation: slideUp 0.4s ease-out 0.1s both;
+  }
+
+  .animate-slide-up-delay-2 {
+    animation: slideUp 0.4s ease-out 0.2s both;
+  }
+
+  .animate-slide-up-delay-3 {
+    animation: slideUp 0.4s ease-out 0.3s both;
+  }
+
+  /* Flutuação suave — ex: ícone de pomba */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Pulso de luz */
+  .animate-glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  /* Background com luz radial suave */
+  .bg-radial-light {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(14, 165, 233, 0.08) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Efeito glass card */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/60 shadow-sm;
+  }
+
+  /* Borda brilhante sutil */
+  .border-glow {
+    box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.2), 0 4px 24px -4px rgba(14, 165, 233, 0.12);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.3); }
+}
+
