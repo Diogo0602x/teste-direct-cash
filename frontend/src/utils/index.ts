@@ -1,4 +1,5 @@
 export { api, extractErrorMessage } from './api';
+export { getBackendPublicOrigin, resolvePostMediaUrl } from './mediaUrl';
 export {
   loginSchema,
   registerSchema,

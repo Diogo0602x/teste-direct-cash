@@ -1,7 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Box from '../Box';
+import Typography from '../Typography';
+import { resolvePostMediaUrl } from '@/utils';
 
 export type PostImageProps = {
   src: string;
@@ -11,21 +13,34 @@ export type PostImageProps = {
 /**
  * Imagem de post no feed: mostra a foto inteira (sem crop agressivo), com largura até
  * a do card e altura máxima limitada — similar ao Instagram.
+ * `src` é reescrito quando veio salvo com localhost/IP local (comum no dev) para a URL
+ * pública do backend, senão o celular não consegue carregar.
  */
 export function PostImage({ src, alt = 'Imagem do post' }: PostImageProps): React.JSX.Element {
+  const resolvedSrc = useMemo(() => resolvePostMediaUrl(src), [src]);
+  const [loadFailed, setLoadFailed] = useState(false);
+
+  if (loadFailed) {
+    return (
+      <Box className="flex min-h-[120px] w-full items-center justify-center rounded-xl border border-dashed border-neutral-200 bg-neutral-50 px-4 py-6">
+        <Typography variant="caption" className="text-center text-neutral-500">
+          Imagem indisponível neste dispositivo (URL inválida, rede ou conteúdo bloqueado).
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box className="w-full min-w-0 overflow-hidden rounded-xl bg-neutral-100">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         className="mx-auto block h-auto w-full max-w-full object-contain [max-height:min(65vh,520px)]"
         loading="lazy"
         decoding="async"
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).style.display = 'none';
-        }}
+        onError={() => setLoadFailed(true)}
       />
     </Box>
   );
