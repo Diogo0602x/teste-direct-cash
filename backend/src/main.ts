@@ -48,4 +48,7 @@ async function bootstrap(): Promise<void> {
   console.log(`📖 Swagger docs em:   http://localhost:${port}/api/docs`);
 }
 
-bootstrap();
+bootstrap().catch((err) => {
+  console.error("FATAL: bootstrap falhou", err);
+  process.exit(1);
+});
