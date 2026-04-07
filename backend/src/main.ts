@@ -6,8 +6,12 @@ import { join } from "path";
 import { AppModule } from "./app.module";
 
 async function bootstrap(): Promise<void> {
-  // Garante que a pasta de uploads existe
-  mkdirSync(join(process.cwd(), "uploads"), { recursive: true });
+  // Garante que a pasta de uploads existe (ignora erro em ambientes read-only)
+  try {
+    mkdirSync(join(process.cwd(), "uploads"), { recursive: true });
+  } catch {
+    // sem-op em produção
+  }
 
   const app = await NestFactory.create(AppModule);
 
