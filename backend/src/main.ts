@@ -1,8 +1,10 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import { mkdirSync } from "fs";
 import { join } from "path";
+import type { Response } from "express";
 import { AppModule } from "./app.module";
 
 process.on("uncaughtException", (err) => {
@@ -25,7 +27,7 @@ async function bootstrap(): Promise<void> {
     // sem-op em produção
   }
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -41,6 +43,11 @@ async function bootstrap(): Promise<void> {
   });
 
   app.setGlobalPrefix("api/v1");
+
+  // Railway e load balancers costumam sondar "/"; sem isso retorna 404 e o healthcheck falha.
+  app.getHttpAdapter().get("/", (_req, res: Response) => {
+    res.status(200).json({ status: "ok" });
+  });
 
   // Swagger — acessível em /api/docs
   const config = new DocumentBuilder()
