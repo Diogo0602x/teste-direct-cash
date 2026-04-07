@@ -61,7 +61,17 @@ async function bootstrap(): Promise<void> {
     swaggerOptions: { persistAuthorization: true },
   });
 
-  const port = process.env.PORT ?? 4000;
+  const rawPort = process.env.PORT;
+  const port =
+    rawPort !== undefined && rawPort !== ""
+      ? Number.parseInt(rawPort, 10)
+      : 4000;
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`PORT inválida: ${String(rawPort)}`);
+  }
+  process.stderr.write(
+    `[nest] listen 0.0.0.0:${port} (PORT=${rawPort ?? "unset → 4000"})\n`,
+  );
   await app.listen(port, "0.0.0.0");
   console.log(`🚀 Backend rodando em: http://localhost:${port}/api/v1`);
   console.log(`📖 Swagger docs em:   http://localhost:${port}/api/docs`);
