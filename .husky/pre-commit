@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+echo "🔍 [pre-commit] Verificando lint e tipos..."
+
+echo "\n--- Backend: lint ---"
+(cd backend && npm run lint)
+
+echo "\n--- Frontend: lint ---"
+(cd frontend && npm run lint)
+
+echo "\n--- Backend: type-check ---"
+(cd backend && npx tsc --noEmit)
+
+echo "\n--- Frontend: type-check ---"
+(cd frontend && npx tsc --noEmit)
+
+echo "\n✅ [pre-commit] Tudo ok!"

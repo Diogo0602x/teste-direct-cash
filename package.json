@@ -1,0 +1,25 @@
+{
+  "name": "teste-tecnico-2026",
+  "version": "1.0.0",
+  "description": "Plataforma full-stack para gestão de igrejas e comunidades religiosas — feed de posts, horários de cultos/missas/confissões, eventos, controle de membros e autenticação JWT.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diogo0602x/teste-direct-cash.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Diogo0602x/teste-direct-cash/issues"
+  },
+  "homepage": "https://github.com/Diogo0602x/teste-direct-cash#readme",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

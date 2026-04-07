@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+echo "🚀 [pre-push] Verificando build e testes..."
+
+echo "\n--- Backend: build ---"
+(cd backend && npm run build)
+
+echo "\n--- Frontend: build ---"
+(cd frontend && npm run build)
+
+echo "\n--- Backend: testes ---"
+(cd backend && npm test)
+
+echo "\n--- Frontend: testes ---"
+(cd frontend && npm test)
+
+echo "\n✅ [pre-push] Tudo ok!"
