@@ -5,6 +5,18 @@ import { mkdirSync } from "fs";
 import { join } from "path";
 import { AppModule } from "./app.module";
 
+process.on("uncaughtException", (err) => {
+  process.stderr.write(`UNCAUGHT EXCEPTION: ${err.stack ?? err.message}\n`);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  process.stderr.write(`UNHANDLED REJECTION: ${String(reason)}\n`);
+  process.exit(1);
+});
+
+process.stderr.write("main.ts carregado, iniciando bootstrap...\n");
+
 async function bootstrap(): Promise<void> {
   // Garante que a pasta de uploads existe (ignora erro em ambientes read-only)
   try {
