@@ -55,9 +55,9 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           {label}
         </Typography>
       )}
-      <Box className="flex items-center gap-3">
+      <Box className="flex w-full min-w-0 flex-col items-stretch gap-3 sm:flex-row sm:items-center">
         <Box
-          className={`relative ${sizeClass} ${roundedClass} border-2 border-dashed border-neutral-200 bg-neutral-50 overflow-hidden flex items-center justify-center flex-shrink-0`}
+          className={`relative mx-auto shrink-0 sm:mx-0 ${sizeClass} ${roundedClass} border-2 border-dashed border-neutral-200 bg-neutral-50 overflow-hidden flex items-center justify-center`}
         >
           {showPreview ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -72,14 +72,14 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           )}
         </Box>
 
-        <Box className="flex flex-1 flex-col gap-1">
-          <Box className="flex items-center gap-1">
+        <Box className="flex min-w-0 w-full flex-1 flex-col gap-1">
+          <Box className="flex min-w-0 items-center gap-1">
             <input
               type="url"
               value={inputValue}
               onChange={(e) => handleChange(e.target.value)}
               placeholder="Cole a URL da imagem..."
-              className="flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-700 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 placeholder:text-neutral-400"
+              className="min-w-0 flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-700 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 placeholder:text-neutral-400"
             />
             {value && (
               <button

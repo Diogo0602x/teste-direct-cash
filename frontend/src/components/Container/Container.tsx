@@ -22,7 +22,7 @@ const Container: React.FC<ContainerProps> = ({
   return (
     <Component
       className={clsx(
-        'w-full px-4 sm:px-6 lg:px-8',
+        'w-full min-w-0 max-w-full px-4 sm:px-6 lg:px-8',
         sizeMap[size],
         centered && 'mx-auto',
         className,

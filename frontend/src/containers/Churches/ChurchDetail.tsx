@@ -246,38 +246,49 @@ const ChurchDetail: React.FC<Props> = ({ churchId }) => {
         </Link>
 
         <Box className="glass-card rounded-2xl p-5 sm:p-6">
-          <Box className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <Box className="flex items-center gap-3 sm:gap-4">
+          <Box className="flex w-full min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <Box className="flex w-full min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:gap-4">
               {isAdmin ? (
-                <ImageUpload
-                  value={logoUrl}
-                  onChange={(url) => void handleLogoChange(url)}
-                  shape="square"
-                  size="sm"
-                />
+                <Box className="w-full min-w-0 shrink-0 sm:max-w-[min(100%,280px)]">
+                  <ImageUpload
+                    value={logoUrl}
+                    onChange={(url) => void handleLogoChange(url)}
+                    shape="square"
+                    size="sm"
+                  />
+                </Box>
               ) : logoUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={logoUrl}
                   alt={church.name}
-                  className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 rounded-2xl object-cover"
+                  className="mx-auto h-12 w-12 shrink-0 rounded-2xl object-cover sm:mx-0 sm:h-14 sm:w-14"
                 />
               ) : (
-                <Box className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-primary-50 sm:h-14 sm:w-14">
+                <Box className="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-50 sm:mx-0 sm:h-14 sm:w-14">
                   <Church size={24} className="text-primary-600 sm:hidden" />
                   <Church size={28} className="hidden text-primary-600 sm:block" />
                 </Box>
               )}
-              <Box>
-                <Typography variant="h5" weight="bold" className="text-neutral-900">
+              <Box className="min-w-0 flex-1 text-center sm:text-left">
+                <Typography variant="h5" weight="bold" className="break-words text-neutral-900">
                   {church.name}
                 </Typography>
                 {(church.city ?? church.state) && (
-                  <Typography variant="body2" className="text-neutral-500 flex items-center gap-1">
-                    <MapPin size={14} /> {[church.city, church.state].filter(Boolean).join(', ')}
+                  <Typography
+                    variant="body2"
+                    className="mt-0.5 flex flex-wrap items-center justify-center gap-1 text-neutral-500 sm:justify-start"
+                  >
+                    <MapPin size={14} className="shrink-0" />{' '}
+                    <span className="break-words text-left">
+                      {[church.city, church.state].filter(Boolean).join(', ')}
+                    </span>
                   </Typography>
                 )}
-                <Typography variant="caption" className="text-neutral-400 flex items-center gap-1">
+                <Typography
+                  variant="caption"
+                  className="mt-0.5 flex items-center justify-center gap-1 text-neutral-400 sm:justify-start"
+                >
                   <Users size={13} /> {church._count?.members ?? 0} membros
                 </Typography>
               </Box>
@@ -324,7 +335,7 @@ const ChurchDetail: React.FC<Props> = ({ churchId }) => {
           )}
         </Box>
 
-        <Box className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <Box className="-mx-4 min-w-0 overflow-x-auto overscroll-x-contain px-4 sm:mx-0 sm:px-0">
           <Box className="flex min-w-max gap-2 border-b border-neutral-200">
             {tabs.map((tab) => (
               <Box
@@ -388,21 +399,26 @@ const ChurchDetail: React.FC<Props> = ({ churchId }) => {
               </Box>
             ) : (
               members.map((member) => (
-                <Box key={member.id} className="glass-card flex items-center gap-3 rounded-xl p-4">
-                  <Box className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-100 flex-shrink-0">
-                    <Typography variant="caption" weight="bold" className="text-primary-700">
-                      {member.user.name.charAt(0).toUpperCase()}
-                    </Typography>
+                <Box
+                  key={member.id}
+                  className="glass-card flex min-w-0 flex-col gap-3 rounded-xl p-4 sm:flex-row sm:items-center"
+                >
+                  <Box className="flex min-w-0 flex-1 items-center gap-3">
+                    <Box className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100">
+                      <Typography variant="caption" weight="bold" className="text-primary-700">
+                        {member.user.name.charAt(0).toUpperCase()}
+                      </Typography>
+                    </Box>
+                    <Box className="min-w-0 flex-1">
+                      <Typography variant="body2" weight="semibold" className="break-words text-neutral-800">
+                        {member.user.name}
+                      </Typography>
+                      <Typography variant="caption" className="break-all text-neutral-400">
+                        {member.user.email}
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box className="flex-1">
-                    <Typography variant="body2" weight="semibold" className="text-neutral-800">
-                      {member.user.name}
-                    </Typography>
-                    <Typography variant="caption" className="text-neutral-400">
-                      {member.user.email}
-                    </Typography>
-                  </Box>
-                  <Box className="flex items-center gap-2">
+                  <Box className="flex shrink-0 flex-wrap items-center gap-2">
                     {member.role === 'ADMIN' && <Badge variant="primary">Admin</Badge>}
                     {isAdmin && member.user.id !== user?.id && (
                       <>
