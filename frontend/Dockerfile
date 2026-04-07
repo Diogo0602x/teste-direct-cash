@@ -10,6 +10,13 @@ EXPOSE 3000
 CMD ["npm", "run", "dev"]
 
 FROM base AS builder
+# Next.js embute NEXT_PUBLIC_* no cliente no momento do `next build`. Sem isso aqui,
+# a imagem de produção continua com http://localhost:4000 mesmo com a var só no runtime.
+# No Railway: defina NEXT_PUBLIC_BACKEND_URL nas variáveis do serviço e faça rebuild.
+ARG NEXT_PUBLIC_BACKEND_URL=http://localhost:4000/api/v1
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+ARG NEXT_PUBLIC_APP_NAME=ChurchNet
+ENV NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
 COPY . .
 RUN npm run build
 
