@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Trash2 } from 'lucide-react';
-import { Box, Typography, Button } from '@/components';
+import { Box, Typography, Button, PostImage } from '@/components';
 import type { Post } from '@/types';
 import { postsService } from '@/services';
 import { api } from '@/utils';
@@ -75,15 +75,7 @@ const ChurchPostCard: React.FC<Props> = ({ post, isAdmin, currentUserId, onRefre
       <Typography variant="body1" className="text-neutral-700 whitespace-pre-wrap">
         {post.content}
       </Typography>
-      {post.imageUrl && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={post.imageUrl}
-          alt="Imagem do post"
-          className="w-full rounded-xl"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-        />
-      )}
+      {post.imageUrl && <PostImage src={post.imageUrl} />}
       <Box className="flex items-center gap-4 border-t border-neutral-100 pt-3">
         <Box
           as="button"

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Send, Trash2, X } from 'lucide-react';
-import { Box, Typography, Button, Input } from '@/components';
+import { Box, Typography, Button, Input, PostImage } from '@/components';
 import type { Post } from '@/types';
 import { postsService } from '@/services';
 import { api, extractErrorMessage } from '@/utils';
@@ -129,15 +129,7 @@ const FeedPostCard: React.FC<Props> = ({ post, currentUserId, onRefresh }) => {
         {post.content}
       </Typography>
 
-      {post.imageUrl && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={post.imageUrl}
-          alt="Imagem do post"
-          className="w-full rounded-xl"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-        />
-      )}
+      {post.imageUrl && <PostImage src={post.imageUrl} />}
 
       {likeError && (
         <Typography variant="caption" className="text-red-500">

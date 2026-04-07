@@ -28,4 +28,7 @@ export type { BadgeProps, BadgeVariant } from './Badge';
 
 export { ImageUpload } from './ImageUpload';
 
+export { PostImage } from './PostImage';
+export type { PostImageProps } from './PostImage';
+
 export { ToastContainer } from './Toast';
