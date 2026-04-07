@@ -3,13 +3,9 @@ import React from 'react';
 export type LogoMarkProps = {
   size?: number;
   className?: string;
-  /** Prefixo único para ids de defs quando há várias marcas na mesma página */
   gradientId?: string;
 };
 
-/**
- * Ícone da marca (cruz) — usado na logo completa, favicon e demais pontos visuais.
- */
 export function LogoMark({
   size = 32,
   className = '',

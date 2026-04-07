@@ -243,8 +243,6 @@ describe("ChurchesController", () => {
     });
   });
 
-  // ─── Schedules ─────────────────────────────────────────────────────────────
-
   const schedule = {
     id: "s1",
     churchId: "c1",
@@ -298,8 +296,6 @@ describe("ChurchesController", () => {
       expect(mockService.deleteSchedule).toHaveBeenCalledWith("c1", "s1", "admin-1");
     });
   });
-
-  // ─── Events ────────────────────────────────────────────────────────────────
 
   const event = { id: "e1", churchId: "c1", title: "Retiro Espiritual", startDate: "2026-06-01" };
 

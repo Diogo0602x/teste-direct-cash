@@ -147,8 +147,6 @@ export class ChurchesController {
     return this.churchesService.addAdminByEmail(churchId, email, req.user.sub);
   }
 
-  // ─── Schedules ────────────────────────────────────────────────────────────
-
   @Get(":id/schedules")
   getSchedules(@Param("id") churchId: string) {
     return this.churchesService.getSchedules(churchId);
@@ -186,8 +184,6 @@ export class ChurchesController {
   ) {
     return this.churchesService.deleteSchedule(churchId, scheduleId, req.user.sub);
   }
-
-  // ─── Events ───────────────────────────────────────────────────────────────
 
   @Get(":id/events")
   getEvents(@Param("id") churchId: string) {

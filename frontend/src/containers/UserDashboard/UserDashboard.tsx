@@ -36,7 +36,6 @@ const UserDashboard: React.FC = () => {
   return (
     <Container as="main" size="xl" className="py-8">
       <Box className="flex flex-col gap-8">
-        {/* Header do usuário */}
         <Box className="glass-card rounded-2xl p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-glow">
           <Box className="flex items-center gap-4">
             <Box className="relative flex-shrink-0">
@@ -96,7 +95,6 @@ const UserDashboard: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Banner admin */}
         {isAdmin && profile?.adminChurch && (
           <Box className="rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-4 flex items-center justify-between gap-4">
             <Box className="flex items-center gap-3">
@@ -120,7 +118,6 @@ const UserDashboard: React.FC = () => {
           </Box>
         )}
 
-        {/* Cards de navegação principais */}
         <Box>
           <Typography variant="subtitle2" weight="semibold" className="text-neutral-600 mb-3 uppercase tracking-wider text-xs">
             Acesso rápido
@@ -156,7 +153,6 @@ const UserDashboard: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Seção de dicas/informações */}
         <Box className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <InfoCard
             icon={<Users size={16} className="text-violet-600" />}

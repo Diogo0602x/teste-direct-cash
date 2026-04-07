@@ -1,7 +1,4 @@
-/**
- * Origem pública do backend (protocolo + host), sem path `/api/v1`.
- * Vem de NEXT_PUBLIC_BACKEND_URL, ex.: https://api.exemplo.com/api/v1 → https://api.exemplo.com
- */
+/** Origem pública do backend a partir de NEXT_PUBLIC_BACKEND_URL (sem `/api/v1`). */
 export function getBackendPublicOrigin(): string {
   const raw = process.env.NEXT_PUBLIC_BACKEND_URL?.trim();
   if (!raw) return '';
@@ -26,14 +23,7 @@ function isNonPublicHost(hostname: string): boolean {
   return false;
 }
 
-/**
- * Ajusta URL de imagem de post para o celular conseguir carregar:
- * - Substitui host local/privado (localhost, 192.168.x, etc.) pela origem pública do backend.
- * - Sobe `http` → `https` quando o host é o mesmo do backend em produção (evita bloqueio de mixed content no Safari).
- *
- * No notebook, DevTools “mobile” ainda é o mesmo PC: `localhost` no &lt;img&gt; funciona.
- * No aparelho real, `localhost` é o próprio telefone — a imagem falha se a URL tiver sido salva assim.
- */
+/** Reescreve host local/privado e http→https no mesmo host do backend para carregar em dispositivos móveis. */
 export function resolvePostMediaUrl(url: string): string {
   const trimmed = url.trim();
   if (!trimmed) return trimmed;

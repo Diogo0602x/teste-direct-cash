@@ -17,9 +17,6 @@ COPY . .
 RUN npx prisma generate && npm run build
 RUN mkdir -p /app/uploads
 ENV NODE_ENV=production
-# Alinha com o target port padrão do domínio público no Railway (8080). O Railway
-# sobrescreve PORT em runtime quando injeta a variável — se não injetar, o proxy
-# continua apontando para 8080 e o Nest precisa escutar nessa porta.
 ENV PORT=8080
 EXPOSE 8080
 CMD ["sh", "-c", "set -e && npx prisma migrate deploy && exec node dist/main"]

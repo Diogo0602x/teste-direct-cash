@@ -56,7 +56,6 @@ const ChurchDetail: React.FC<Props> = ({ churchId }) => {
   const [myMemberStatus, setMyMemberStatus] = useState<string | null>(null);
   const [adminEmail, setAdminEmail] = useState('');
 
-  // Schedule form state
   const [showScheduleForm, setShowScheduleForm] = useState(false);
   const [scheduleType, setScheduleType] = useState<ScheduleType>('MASS');
   const [scheduleTitle, setScheduleTitle] = useState('');
@@ -64,7 +63,6 @@ const ChurchDetail: React.FC<Props> = ({ churchId }) => {
   const [scheduleTime, setScheduleTime] = useState('');
   const [scheduleDesc, setScheduleDesc] = useState('');
 
-  // Event form state
   const [showEventForm, setShowEventForm] = useState(false);
   const [eventTitle, setEventTitle] = useState('');
   const [eventDesc, setEventDesc] = useState('');

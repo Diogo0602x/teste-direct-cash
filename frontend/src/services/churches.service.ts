@@ -14,8 +14,6 @@ import type {
 } from '@/types';
 
 export const churchesService = {
-  // ─── Church CRUD ──────────────────────────────────────────────────────────
-
   list: async (page: number, limit: number): Promise<PaginatedResponse<Church>> => {
     const { data } = await api.get<PaginatedResponse<Church>>('/churches', {
       params: { page, limit },
@@ -47,8 +45,6 @@ export const churchesService = {
     return data;
   },
 
-  // ─── Schedules ────────────────────────────────────────────────────────────
-
   getSchedules: async (churchId: string): Promise<ChurchSchedule[]> => {
     const { data } = await api.get<ChurchSchedule[]>(`/churches/${churchId}/schedules`);
     return data;
@@ -69,8 +65,6 @@ export const churchesService = {
     await api.delete(`/churches/${churchId}/schedules/${scheduleId}`);
   },
 
-  // ─── Events ───────────────────────────────────────────────────────────────
-
   getEvents: async (churchId: string): Promise<ChurchEvent[]> => {
     const { data } = await api.get<ChurchEvent[]>(`/churches/${churchId}/events`);
     return data;
@@ -87,8 +81,6 @@ export const churchesService = {
   deleteEvent: async (churchId: string, eventId: string): Promise<void> => {
     await api.delete(`/churches/${churchId}/events/${eventId}`);
   },
-
-  // ─── Members ──────────────────────────────────────────────────────────────
 
   getMembers: async (
     churchId: string,

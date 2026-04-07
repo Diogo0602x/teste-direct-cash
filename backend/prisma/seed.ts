@@ -5,7 +5,6 @@ import * as fs from "fs";
 import * as path from "path";
 import * as dotenv from "dotenv";
 
-// Carrega .env.seed se existir, senão usa .env principal
 const seedEnvPath = path.resolve(__dirname, "..", ".env.seed");
 const mainEnvPath = path.resolve(__dirname, "..", ".env");
 dotenv.config({ path: fs.existsSync(seedEnvPath) ? seedEnvPath : mainEnvPath, override: true });
@@ -16,7 +15,6 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-// Prisma 7 requer driver adapter explícito (mesmo padrão do PrismaService)
 const adapter = new PrismaPg({ connectionString: DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
@@ -36,7 +34,6 @@ const CHURCH_CNPJ = process.env.SEED_CHURCH_CNPJ ?? "12345678000195";
 async function main(): Promise<void> {
   console.log("🌱 Iniciando seed...\n");
 
-  // ── Admin ──────────────────────────────────────────────────────────────────
   const adminHash = await bcrypt.hash(ADMIN_PASSWORD, SALT_ROUNDS);
   const admin = await prisma.user.upsert({
     where: { email: ADMIN_EMAIL },
@@ -50,7 +47,6 @@ async function main(): Promise<void> {
   });
   console.log(`✔ Admin criado: ${admin.email}`);
 
-  // ── Igreja ─────────────────────────────────────────────────────────────────
   const church = await prisma.church.upsert({
     where: { cnpj: CHURCH_CNPJ },
     update: {},
@@ -65,7 +61,6 @@ async function main(): Promise<void> {
   });
   console.log(`✔ Igreja criada: ${church.name}`);
 
-  // ── Admin como membro ATIVO com role ADMIN ────────────────────────────────
   await prisma.churchMember.upsert({
     where: { userId_churchId: { userId: admin.id, churchId: church.id } },
     update: {},
@@ -78,7 +73,6 @@ async function main(): Promise<void> {
   });
   console.log(`✔ Admin vinculado à igreja como membro ADMIN`);
 
-  // ── Usuário normal ─────────────────────────────────────────────────────────
   const userHash = await bcrypt.hash(USER_PASSWORD, SALT_ROUNDS);
   const user = await prisma.user.upsert({
     where: { email: USER_EMAIL },
@@ -92,7 +86,6 @@ async function main(): Promise<void> {
   });
   console.log(`✔ Usuário criado: ${user.email}`);
 
-  // ── Usuário normal como membro ATIVO ──────────────────────────────────────
   await prisma.churchMember.upsert({
     where: { userId_churchId: { userId: user.id, churchId: church.id } },
     update: {},

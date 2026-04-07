@@ -16,7 +16,6 @@ export default function HomePage(): React.JSX.Element {
       <BackgroundDecoration />
 
       <Container as="main" size="xl" className="relative flex min-h-screen flex-col">
-        {/* Header */}
         <Box as="header" className="flex items-center justify-between py-5 animate-fade-in">
           <Logo />
           <Box className="flex items-center gap-2">
@@ -29,7 +28,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* Hero */}
         <Box className="flex flex-1 flex-col items-center justify-center gap-10 py-20 text-center">
           <Box className="animate-slide-up inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5">
             <Star size={12} className="fill-primary-500 text-primary-500" />
@@ -70,7 +68,6 @@ export default function HomePage(): React.JSX.Element {
             </Link>
           </Box>
 
-          {/* Stats */}
           <Box className="animate-slide-up-delay-3 flex flex-wrap justify-center gap-x-10 gap-y-4 pt-2">
             {HERO_STATS.map(({ value, label }) => (
               <Box key={label} className="flex flex-col items-center gap-0.5">
@@ -85,7 +82,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* How it works */}
         <Box className="py-16 border-t border-neutral-100">
           <Box className="text-center mb-12">
             <Typography variant="overline" className="text-primary-600 font-semibold tracking-widest uppercase text-xs mb-2 block">
@@ -121,7 +117,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* Features */}
         <Box className="py-16 border-t border-neutral-100">
           <Box className="text-center mb-12">
             <Typography variant="overline" className="text-primary-600 font-semibold tracking-widest uppercase text-xs mb-2 block">
@@ -152,7 +147,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* Testimonials */}
         <Box className="py-16 border-t border-neutral-100">
           <Box className="text-center mb-12">
             <Typography variant="overline" className="text-primary-600 font-semibold tracking-widest uppercase text-xs mb-2 block">
@@ -193,7 +187,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* CTA Banner */}
         <Box className="py-16 border-t border-neutral-100">
           <Box className="rounded-3xl bg-gradient-to-br from-primary-600 to-primary-800 p-10 text-center shadow-xl shadow-primary-200/50">
             <Typography variant="h3" weight="bold" className="text-white mb-3">
@@ -221,7 +214,6 @@ export default function HomePage(): React.JSX.Element {
           </Box>
         </Box>
 
-        {/* Footer */}
         <Box as="footer" className="py-8 text-center border-t border-neutral-200">
           <Box className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <Logo />

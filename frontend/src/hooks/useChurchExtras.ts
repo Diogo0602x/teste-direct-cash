@@ -6,8 +6,6 @@ import { churchesService, uploadService } from '@/services';
 import { useToast } from '@/context';
 import type { ChurchSchedule, ChurchEvent, CreateSchedulePayload, CreateEventPayload } from '@/types';
 
-// ─── Schedules ─────────────────────────────────────────────────────────────
-
 type UseSchedulesReturn = {
   schedules: ChurchSchedule[];
   isLoading: boolean;
@@ -70,8 +68,6 @@ export function useSchedules(): UseSchedulesReturn {
   return { schedules, isLoading, error, fetchSchedules, createSchedule, deleteSchedule };
 }
 
-// ─── Events ────────────────────────────────────────────────────────────────
-
 type UseEventsReturn = {
   events: ChurchEvent[];
   isLoading: boolean;
@@ -133,8 +129,6 @@ export function useEvents(): UseEventsReturn {
 
   return { events, isLoading, error, fetchEvents, createEvent, deleteEvent };
 }
-
-// ─── Upload ────────────────────────────────────────────────────────────────
 
 type UseUploadReturn = {
   isLoading: boolean;

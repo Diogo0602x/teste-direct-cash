@@ -17,15 +17,10 @@ process.on("unhandledRejection", (reason) => {
   process.exit(1);
 });
 
-process.stderr.write("main.ts carregado, iniciando bootstrap...\n");
-
 async function bootstrap(): Promise<void> {
-  // Garante que a pasta de uploads existe (ignora erro em ambientes read-only)
   try {
     mkdirSync(join(process.cwd(), "uploads"), { recursive: true });
-  } catch {
-    // sem-op em produção
-  }
+  } catch {}
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -44,12 +39,10 @@ async function bootstrap(): Promise<void> {
 
   app.setGlobalPrefix("api/v1");
 
-  // Railway e load balancers costumam sondar "/"; sem isso retorna 404 e o healthcheck falha.
   app.getHttpAdapter().get("/", (_req, res: Response) => {
     res.status(200).json({ status: "ok" });
   });
 
-  // Swagger — acessível em /api/docs
   const config = new DocumentBuilder()
     .setTitle("Fé Viva API")
     .setDescription("API REST da plataforma Fé Viva — gestão de igrejas e comunidades religiosas")
@@ -69,9 +62,6 @@ async function bootstrap(): Promise<void> {
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error(`PORT inválida: ${String(rawPort)}`);
   }
-  process.stderr.write(
-    `[nest] listen 0.0.0.0:${port} (PORT=${rawPort ?? "unset → 4000"})\n`,
-  );
   await app.listen(port, "0.0.0.0");
   console.log(`🚀 Backend rodando em: http://localhost:${port}/api/v1`);
   console.log(`📖 Swagger docs em:   http://localhost:${port}/api/docs`);

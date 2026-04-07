@@ -16,7 +16,7 @@ import type { AuthenticatedRequest } from "../types";
 import type { Express } from "express";
 
 const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
+const MAX_SIZE_BYTES = 5 * 1024 * 1024;
 
 @Controller("upload")
 export class UploadController {

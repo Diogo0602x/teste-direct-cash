@@ -613,8 +613,6 @@ describe("ChurchesService", () => {
     });
   });
 
-  // ─── Schedules ─────────────────────────────────────────────────────────────
-
   const schedule = {
     id: "s1",
     churchId: "c1",
@@ -724,8 +722,6 @@ describe("ChurchesService", () => {
       );
     });
   });
-
-  // ─── Events ────────────────────────────────────────────────────────────────
 
   const event = {
     id: "e1",

@@ -54,8 +54,6 @@ const event = {
   updatedAt: "2026-01-01T00:00:00Z",
 };
 
-// ─── useSchedules ──────────────────────────────────────────────────────────
-
 describe("useSchedules", () => {
   beforeEach(jest.resetAllMocks);
 
@@ -167,8 +165,6 @@ describe("useSchedules", () => {
   });
 });
 
-// ─── useEvents ────────────────────────────────────────────────────────────
-
 describe("useEvents", () => {
   beforeEach(jest.resetAllMocks);
 
@@ -222,7 +218,6 @@ describe("useEvents", () => {
 
     expect(created).toEqual(event);
     expect(result.current.events).toHaveLength(2);
-    // deve estar ordenado: earlierEvent antes de event
     expect(result.current.events[0]?.id).toBe("e0");
     expect(result.current.events[1]?.id).toBe("e1");
   });
@@ -280,8 +275,6 @@ describe("useEvents", () => {
     expect(result.current.error).toBe("Erro delete evento");
   });
 });
-
-// ─── useUpload ────────────────────────────────────────────────────────────
 
 describe("useUpload", () => {
   beforeEach(jest.resetAllMocks);

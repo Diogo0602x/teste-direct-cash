@@ -427,8 +427,6 @@ export class ChurchesService {
     };
   }
 
-  // ─── Schedules ────────────────────────────────────────────────────────────
-
   async getSchedules(churchId: string) {
     await this.findById(churchId);
     return this.prisma.churchSchedule.findMany({
@@ -469,8 +467,6 @@ export class ChurchesService {
     if (!schedule) throw new NotFoundException("Horário não encontrado");
     await this.prisma.churchSchedule.delete({ where: { id: scheduleId } });
   }
-
-  // ─── Events ───────────────────────────────────────────────────────────────
 
   async getEvents(churchId: string) {
     await this.findById(churchId);

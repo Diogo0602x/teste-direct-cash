@@ -10,12 +10,6 @@ export type PostImageProps = {
   alt?: string;
 };
 
-/**
- * Imagem de post no feed: mostra a foto inteira (sem crop agressivo), com largura até
- * a do card e altura máxima limitada — similar ao Instagram.
- * `src` é reescrito quando veio salvo com localhost/IP local (comum no dev) para a URL
- * pública do backend, senão o celular não consegue carregar.
- */
 export function PostImage({ src, alt = 'Imagem do post' }: PostImageProps): React.JSX.Element {
   const resolvedSrc = useMemo(() => resolvePostMediaUrl(src), [src]);
   const [loadFailed, setLoadFailed] = useState(false);
