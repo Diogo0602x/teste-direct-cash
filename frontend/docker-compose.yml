@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: church_frontend
+    container_name: fe_viva_frontend
     restart: unless-stopped
     environment:
       NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:4000/api/v1}

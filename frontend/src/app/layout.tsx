@@ -8,6 +8,10 @@ export const metadata: Metadata = {
     template: '%s | Fé Viva',
   },
   description: 'Plataforma de gestão de igrejas e comunidades de fé',
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    apple: '/favicon.svg',
+  },
 };
 
 export const viewport: Viewport = {

@@ -28,6 +28,10 @@ export const postsService = {
     return data;
   },
 
+  remove: async (postId: string): Promise<void> => {
+    await api.delete(`/posts/${postId}`);
+  },
+
   toggleLike: async (postId: string): Promise<{ liked: boolean; count: number }> => {
     const { data } = await api.post<{ liked: boolean; count: number }>(
       `/posts/${postId}/like`,

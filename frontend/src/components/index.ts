@@ -18,7 +18,7 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
 export { default as Input } from './Input';
 export type { InputProps, InputSize } from './Input';
 
-export { default as Logo } from './Logo';
+export { default as Logo, LogoMark } from './Logo';
 
 export { default as Textarea } from './Textarea';
 export type { TextareaProps } from './Textarea';

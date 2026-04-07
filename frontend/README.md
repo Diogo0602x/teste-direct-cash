@@ -1,6 +1,6 @@
-# ChurchNet — Frontend
+# Fé Viva — Frontend
 
-Interface web para a plataforma ChurchNet, construída com **Next.js 15**, **React 18** e **Tailwind CSS**.
+Interface web da plataforma **Fé Viva**, construída com **Next.js 15**, **React 18** e **Tailwind CSS**.
 
 ## Tecnologias
 
@@ -16,7 +16,7 @@ Interface web para a plataforma ChurchNet, construída com **Next.js 15**, **Rea
 ## Pré-requisitos
 
 - Node.js 20+
-- Backend da aplicação rodando (ver [church-backend](../backend))
+- Backend da aplicação rodando (ver a pasta [`backend`](../backend))
 
 ## Variáveis de Ambiente
 

@@ -1,7 +1,7 @@
 {
-  "name": "church-backend",
+  "name": "fe-viva-backend",
   "version": "0.1.0",
-  "description": "Backend para gestão de igrejas e redes sociais religiosas",
+  "description": "API Fé Viva — gestão de igrejas e redes sociais religiosas",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

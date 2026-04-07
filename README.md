@@ -1,4 +1,4 @@
-# ChurchNet
+# Fé Viva
 
 Plataforma full-stack para gestão de igrejas e comunidades religiosas — feed de posts, horários de cultos/missas/confissões, eventos, controle de membros e autenticação JWT.
 

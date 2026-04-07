@@ -15,7 +15,7 @@ FROM base AS builder
 # No Railway: defina NEXT_PUBLIC_BACKEND_URL nas variáveis do serviço e faça rebuild.
 ARG NEXT_PUBLIC_BACKEND_URL=http://localhost:4000/api/v1
 ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
-ARG NEXT_PUBLIC_APP_NAME=ChurchNet
+ARG NEXT_PUBLIC_APP_NAME=Fé Viva
 ENV NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
 COPY . .
 RUN npm run build

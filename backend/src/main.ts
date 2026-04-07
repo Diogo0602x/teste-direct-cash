@@ -51,8 +51,8 @@ async function bootstrap(): Promise<void> {
 
   // Swagger — acessível em /api/docs
   const config = new DocumentBuilder()
-    .setTitle("ChurchNet API")
-    .setDescription("API REST para gestão de igrejas e comunidades religiosas")
+    .setTitle("Fé Viva API")
+    .setDescription("API REST da plataforma Fé Viva — gestão de igrejas e comunidades religiosas")
     .setVersion("1.0")
     .addBearerAuth({ type: "http", scheme: "bearer", bearerFormat: "JWT" }, "JWT")
     .build();

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Heart, MessageCircle, Send, X } from 'lucide-react';
+import { Heart, MessageCircle, Send, Trash2, X } from 'lucide-react';
 import { Box, Typography, Button, Input } from '@/components';
 import type { Post } from '@/types';
+import { postsService } from '@/services';
 import { api, extractErrorMessage } from '@/utils';
 
 type Comment = { id: string; content: string; author: { id: string; name: string } };
@@ -67,32 +68,55 @@ const FeedPostCard: React.FC<Props> = ({ post, currentUserId, onRefresh }) => {
     }
   };
 
+  const isAuthor = currentUserId !== undefined && currentUserId === post.author.id;
+
+  const handleDeletePost = async (): Promise<void> => {
+    try {
+      await postsService.remove(post.id);
+      onRefresh();
+    } catch {
+    }
+  };
+
   return (
     <Box className="glass-card rounded-2xl p-5 flex flex-col gap-3">
-      <Box className="flex items-center gap-2">
-        <Box className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 overflow-hidden flex-shrink-0">
-          {post.author.avatarUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={post.author.avatarUrl} alt={post.author.name} className="h-full w-full object-cover" />
-          ) : (
-            <Typography variant="caption" weight="bold" className="text-primary-700">
-              {post.author.name.charAt(0).toUpperCase()}
+      <Box className="flex items-center justify-between gap-2">
+        <Box className="flex min-w-0 flex-1 items-center gap-2">
+          <Box className="flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary-100">
+            {post.author.avatarUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={post.author.avatarUrl} alt={post.author.name} className="h-full w-full object-cover" />
+            ) : (
+              <Typography variant="caption" weight="bold" className="text-primary-700">
+                {post.author.name.charAt(0).toUpperCase()}
+              </Typography>
+            )}
+          </Box>
+          <Box className="min-w-0 flex flex-col">
+            <Typography variant="body2" weight="semibold" className="text-neutral-800">
+              {post.author.name}
             </Typography>
-          )}
+            {post.church && (
+              <Typography variant="caption" className="text-neutral-400">
+                {post.church.name}
+              </Typography>
+            )}
+          </Box>
         </Box>
-        <Box className="flex flex-col">
-          <Typography variant="body2" weight="semibold" className="text-neutral-800">
-            {post.author.name}
+        <Box className="flex flex-shrink-0 items-center gap-1">
+          <Typography variant="caption" className="text-neutral-400">
+            {new Date(post.createdAt).toLocaleDateString('pt-BR')}
           </Typography>
-          {post.church && (
-            <Typography variant="caption" className="text-neutral-400">
-              {post.church.name}
-            </Typography>
+          {isAuthor && (
+            <Button
+              variant="ghost"
+              size="xs"
+              onClick={() => void handleDeletePost()}
+              aria-label="Excluir publicação"
+              leftIcon={<Trash2 size={15} />}
+            />
           )}
         </Box>
-        <Typography variant="caption" className="ml-auto text-neutral-400">
-          {new Date(post.createdAt).toLocaleDateString('pt-BR')}
-        </Typography>
       </Box>
 
       {post.title && (

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Heart, MessageCircle, Trash2 } from 'lucide-react';
 import { Box, Typography, Button } from '@/components';
 import type { Post } from '@/types';
+import { postsService } from '@/services';
 import { api } from '@/utils';
 
 type Props = {
@@ -29,7 +30,7 @@ const ChurchPostCard: React.FC<Props> = ({ post, isAdmin, currentUserId, onRefre
 
   const handleDelete = async (): Promise<void> => {
     try {
-      await api.delete(`/posts/${post.id}`);
+      await postsService.remove(post.id);
       onRefresh();
     } catch {
     }

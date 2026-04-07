@@ -1,6 +1,6 @@
-# ChurchNet — Backend
+# Fé Viva — Backend
 
-API REST para gestão de igrejas e redes sociais religiosas, construída com **NestJS**, **Prisma** e **PostgreSQL**.
+API REST da plataforma **Fé Viva** para gestão de igrejas e redes sociais religiosas, construída com **NestJS**, **Prisma** e **PostgreSQL**.
 
 ## Tecnologias
 
