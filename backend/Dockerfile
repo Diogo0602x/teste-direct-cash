@@ -8,8 +8,9 @@ RUN npx prisma generate
 EXPOSE 4000
 CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:dev"]
 
-FROM node:20-alpine AS production
+FROM node:20-slim AS production
 WORKDIR /app
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 COPY package*.json ./
 RUN npm ci
 COPY . .
